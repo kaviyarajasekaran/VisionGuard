@@ -22,10 +22,10 @@ class OCRModule:
     def extract_text(self, frame):
         """Extract text — resize frame first for speed."""
         try:
-            # ✅ Resize to small size before OCR — much faster on CPU
+            # Resize to small size before OCR — much faster on CPU
             small = cv2.resize(frame, (320, 240))
 
-            # ✅ Convert to grayscale — easier for OCR to read
+            # Convert to grayscale — easier for OCR to read
             gray = cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)
 
             results = self.reader.readtext(gray, detail=1, paragraph=False)
