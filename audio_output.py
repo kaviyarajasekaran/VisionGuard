@@ -16,7 +16,7 @@ class AudioOutput:
 
     def __init__(self, language="english", rate=150):
         self.language     = language.lower()
-        # ✅ Max 3 items in queue — old alerts drop automatically
+        # Max 3 items in queue — old alerts drop automatically
         self.speech_queue = queue.Queue(maxsize=3)
         self._stopped     = False
         self._worker      = None
@@ -69,7 +69,7 @@ class AudioOutput:
 
     def _speak_tamil(self, text):
         """
-        ✅ Fix: gTTS download + pygame play in background sub-thread
+        Fix: gTTS download + pygame play in background sub-thread
         This means the queue worker moves on immediately
         Camera never hangs waiting for Tamil audio to finish
         """
@@ -101,7 +101,7 @@ class AudioOutput:
         if not text or not text.strip() or self._stopped:
             return
         print(f"[AudioOutput] Speaking: {text}")
-        # ✅ Don't block if queue is full — drop old alert
+        # Don't block if queue is full — drop old alert
         try:
             self.speech_queue.put_nowait(text)
         except queue.Full:
